@@ -1,21 +1,25 @@
-package main
+package TwoPointers
 
-import (
-	"fmt"
-)
+/**
+Given a singly linked list, determine if it is a palindrome.
 
-func main() {
-	test1a := ListNode{Val: 2, Next: nil}
-	test1 := ListNode{Val: 1, Next: &test1a}
-	fmt.Println(isPalindrome(&test1))
+Example 1:
 
-	test2c := ListNode{Val: 1, Next: nil}
-	test2b := ListNode{Val: 2, Next: &test2c}
-	test2a := ListNode{Val: 2, Next: &test2b}
-	test2 := ListNode{Val: 1, Next: &test2a}
-	fmt.Println(isPalindrome(&test2))
-}
+Input: 1->2
+Output: false
+Example 2:
 
+Input: 1->2->2->1
+Output: true
+*/
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func isPalindrome(head *ListNode) bool {
 	if head == nil || head.Next == nil {
 		return true
