@@ -5,57 +5,22 @@ import (
 )
 
 func main() {
-	test1a := ListNode{Val: 2, Next: nil}
-	test1 := ListNode{Val: 1, Next: &test1a}
-	fmt.Println(isPalindrome(&test1))
 
-	test2c := ListNode{Val: 1, Next: nil}
-	test2b := ListNode{Val: 2, Next: &test2c}
-	test2a := ListNode{Val: 2, Next: &test2b}
-	test2 := ListNode{Val: 1, Next: &test2a}
-	fmt.Println(isPalindrome(&test2))
+	test1 := []byte("hello")
+	test2 := []byte("Hannah")
+
+	reverseString344(test1)
+	reverseString344(test2)
 }
 
-func isPalindrome(head *ListNode) bool {
-	if head == nil || head.Next == nil {
-		return true
+func reverseString344(bytes []byte) {
+	n := len(bytes)
+	if n == 0 {
+		return
 	}
-	fast, slow := head, head
-	for fast.Next != nil && fast.Next.Next != nil {
-		fast = head.Next.Next
-		slow = head.Next
+	for l, r := 0, n-1; l < r; l, r = l+1, r-1 {
+		bytes[l], bytes[r] = bytes[r], bytes[l]
 	}
-	if fast != nil {
-		slow = slow.Next
-	}
-	reverse(fast)
-	for slow != nil && fast.Val == slow.Val {
-		fast = fast.Next
-		slow = slow.Next
-	}
-	return slow == nil
-}
 
-/**
-Use the fast and slow pointer to find the middle of the list.
-Which means when fast pointer , reaches the end of the last,
-slow pointer would reach the middle.
-Then reverse the second half of the last and
-compare each element from the first half of the list with the ones in second half.
-*/
-
-func reverse(head *ListNode) *ListNode {
-	var prev *ListNode = nil
-	for head != nil {
-		next := head.Next
-		head.Next = prev
-		prev = head
-		head = next
-	}
-	return prev
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
+	fmt.Println(string(bytes[:]))
 }
