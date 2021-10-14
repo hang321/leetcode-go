@@ -2,25 +2,39 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func main() {
 
-	test1 := []byte("hello")
-	test2 := []byte("Hannah")
+	test1 := []int{1, 1}
+	test2 := []int{4, 3, 2, 1, 4}
+	test3 := []int{1, 2, 1}
 
-	reverseString344(test1)
-	reverseString344(test2)
+	fmt.Println(maxArea(test1))
+	fmt.Println(maxArea(test2))
+	fmt.Println(maxArea(test3))
 }
 
-func reverseString344(bytes []byte) {
-	n := len(bytes)
-	if n == 0 {
-		return
-	}
-	for l, r := 0, n-1; l < r; l, r = l+1, r-1 {
-		bytes[l], bytes[r] = bytes[r], bytes[l]
+func maxArea(height []int) int {
+	i, j := 0, len(height)-1
+	max := 0
+
+	for i < j {
+		a, b := height[i], height[j]
+		h := int(math.Min(float64(a), float64(b)))
+
+		area := h * (j - i)
+		if max < area {
+			max = area
+		}
+
+		if a < b {
+			i++
+		} else {
+			j--
+		}
 	}
 
-	fmt.Println(string(bytes[:]))
+	return max
 }
